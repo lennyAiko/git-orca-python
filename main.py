@@ -1,5 +1,7 @@
 # let's create git-orca!
 
+## Is the pull request being handled properly? Look into it further
+
 import requests, os, json
 from dotenv import load_dotenv
 load_dotenv()
@@ -56,23 +58,35 @@ count = 1
 if len(r) < 1:
     print(f"Found no {selection}'s here")
 else:
-    for i in range(len(r)):
-        if "pull_request" not in r[i]:
-            r[i]["pull_request"] = None
-    for i in range(len(r)):
-        if r[i]["pull_request"] is not None:
-            count+=1
-            store.append({
-                "count": count,
-                "url": r[i]["url"],
-                "title": r[i]["title"],
-                "state": r[i]["state"],
-                "issue_number": r[i]["number"],
-                "user": r[i]["user"]["login"],
-                "user_url": r[i]["user"]["url"],
-                "created_at": r[i]["created_at"],
-                "updated_at": r[i]["updated_at"],
-                "body": r[i]["body"] if r[i]["body"] else "empty"
-            })
-    with open("git-orca.json", "w+") as f:
-        f.write(str(json.dumps(store, indent=4)))
+    match(selection):
+        case "issues":
+            for i in range(len(r)):
+                if "pull_request" not in r[i]:
+                    r[i]["pull_request"] = None
+            for i in range(len(r)):
+                if r[i]["pull_request"] is not None:
+                    count+=1
+                    store.append({
+                        "count": count,
+                        "url": r[i]["url"],
+                        "title": r[i]["title"],
+                        "state": r[i]["state"],
+                        "issue_number": r[i]["number"],
+                        "user": r[i]["user"]["login"],
+                        "user_url": r[i]["user"]["url"],
+                        "created_at": r[i]["created_at"],
+                        "updated_at": r[i]["updated_at"],
+                        "body": r[i]["body"] if r[i]["body"] else "empty"
+                    })
+            with open("git-orca.json", "w+") as f:
+                f.write(str(json.dumps(store, indent=4)))
+        case "pr":
+            for i in range(len(r)):
+                if "pull_request" in r[i]:
+                    if r[i]["pull_request"] is not None:
+                        store.append(r[i]["pull_request"])
+            with open("git-orca.json", "w+") as f:
+                f.write(str(json.dumps(store, indent=4)))
+        case _:
+            print(f"Found no {selection}'s here")
+           
