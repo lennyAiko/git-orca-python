@@ -6,8 +6,6 @@ load_dotenv()
 
 TOKEN = os.getenv("TOKEN")
 
-print(TOKEN)
-
 def default_value(var, value):
     if not var:
         var = value
@@ -53,6 +51,7 @@ r = requests.get(f"https://api.github.com/repos/{owner}/{repo}/issues",
 r = r.json()
 
 store = []
+count = 1
 
 if len(r) < 1:
     print(f"Found no {selection}'s here")
@@ -62,6 +61,18 @@ else:
             r[i]["pull_request"] = None
     for i in range(len(r)):
         if r[i]["pull_request"] is not None:
-            store.append(r[i])
-
-print(store)
+            count+=1
+            store.append({
+                "count": count,
+                "url": r[i]["url"],
+                "title": r[i]["title"],
+                "state": r[i]["state"],
+                "issue_number": r[i]["number"],
+                "user": r[i]["user"]["login"],
+                "user_url": r[i]["user"]["url"],
+                "created_at": r[i]["created_at"],
+                "updated_at": r[i]["updated_at"],
+                "body": r[i]["body"] if r[i]["body"] else "empty"
+            })
+    with open("git-orca.json", "w+") as f:
+        f.write(str(json.dumps(store, indent=4)))
