@@ -12,25 +12,25 @@ def default_value(var, value):
 def CLI(TOKEN):
     print("\n<==> git-orca <==>\n")
 
-    owner = input("\nWho is the owner of the repo? ")
+    owner = input("\nWho is the owner of the repo?\n")
     owner = default_value(var=owner, value="lennyaiko")
 
-    repo = input("\nWhat is the name of the repo? ")
+    repo = input("\nWhat is the name of the repo?\n")
     repo = default_value(var=repo, value="mantasails")
 
-    selection = input("\nDo you want to view issues or PR? ")
+    selection = input("\nDo you want to view issues or PR?\n")
     selection = default_value(var=selection, value="issues")
 
-    state = input("\nDo you want open or closed? ")
+    state = input("\nDo you want open or closed?\n")
     state = default_value(var=state, value="closed")
 
-    page = input("\nWhat page do you want to view? ")
+    page = input("\nWhat page do you want to view?\n")
     page = default_value(var=page, value="1")
 
-    per_page = input("\nHow many per page? ")
+    per_page = input("\nHow many per page?\n")
     per_page = default_value(var=per_page, value="30")
 
-    file_format = input("\nSelect a file format" )
+    file_format = input("\nSelect a file format:\n" )
     file_format = default_value(var=file_format, value="txt")
 
     print("\nFetching...\n")
@@ -48,26 +48,26 @@ def CLI(TOKEN):
                     })
     r = r.json()
 
-    holder = []
+    print("\nDone fetching")
 
     if len(r) < 1:
         print(f"Found no {selection}'s here")
     else:
         match(selection):
             case "issues":
-                
+                print("\nGenerating file...\n")
                 match(file_format):
                     case "json":
                         write_json_issues(r)                
                     case "txt":
                         write_txt_issues(r)
             case "pr":
+                print("\nGenerating file...\n")
                 match (file_format):
                     case "json":
                         write_json_pr(r)
                     case "pr":
                         write_txt_pr(r)
-                    
             case _:
                 print(f"Found no {selection}'s here")
 
