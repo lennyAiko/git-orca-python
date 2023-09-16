@@ -9,7 +9,8 @@ def default_value(var, value):
         print(var)
     return var
 
-def CLI(TOKEN):
+def CLI(token, args):
+    print(args)
     print("\n<==> git-orca <==>\n")
 
     owner = input("\nWho is the owner of the repo?\n")
@@ -39,7 +40,7 @@ def CLI(TOKEN):
                     headers={
                         "Accept": "application/vnd.github+json",
                         "X-GitHub-Api-Version": "2022-11-28",
-                        "Authorization": f"Bearer {TOKEN}"
+                        "Authorization": f"Bearer {token}"
                     },
                     params={
                         "state": f"{state}",
