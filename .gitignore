@@ -2,3 +2,4 @@
 env/
 git-orca.json
 git-orca.txt
+helpers/__pycache__
