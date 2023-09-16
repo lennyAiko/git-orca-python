@@ -1,11 +1,17 @@
 #!/usr/bin/env python3
 
-import os
+import os, sys
 from dotenv import load_dotenv
 load_dotenv()
 
 from helpers.commands import CLI
 
-TOKEN = os.getenv("TOKEN")
+def main(TOKEN):
+    try:
+        CLI(TOKEN)
+    except KeyboardInterrupt:
+        print("\n\nThanks for using git-orca, see you next time Champ!")
+        sys.exit()
 
-CLI(TOKEN)
+if __name__ == "__main__":
+    main(os.getenv("TOKEN"))
