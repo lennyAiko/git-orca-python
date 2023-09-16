@@ -1,7 +1,5 @@
 # let's create git-orca!
 
-## Is the pull request being handled properly? Look into it further
-
 import requests, os, json
 from dotenv import load_dotenv
 load_dotenv()
