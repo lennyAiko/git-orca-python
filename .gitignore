@@ -1,6 +1,6 @@
 .env
 env/
-git-orca.json
-git-orca.txt
-helpers/__pycache__
+git-orca/git-orca.json
+git-orca/git-orca.txt
+git-orca/helpers/__pycache__
 test.py
