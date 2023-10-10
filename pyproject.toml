@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "git-orca-python"
+version = "0.1.0"
+description = "This a CLI tool to fetch issues and PRs from any repo"
+authors = ["lennox charles <lennyaiko17@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
