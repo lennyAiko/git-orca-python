@@ -14,49 +14,42 @@ def CLI(token, args):
         owner = input("\nWho is the owner of the repo?\n")
         if not owner:
             owner = "lennyaiko"
-            print(owner)
 
     repo = None
     if not args["name"]:
         repo = input("\nWhat is the name of the repo?\n")
         if not repo:
             repo = "git-orca"
-            print(repo)
 
     selection = None
     if not args["issues"] and not args["pr"]:
         selection = input("\nDo you want to view issues or PR?\n")
     if args["issues"]: selection = "issues"
     if args["pr"]: selection = "pr"
-    print(selection)
 
     state = None
     if not args["opened"] and not args["closed"]:
         state = input("\nDo you want open or closed?\n")
     if args["opened"]: state = "open"
     if args["closed"]: state = "closed"
-    print(state)
 
     page = None
     if args["p"] == 0:
         page = int(input("\nWhat page do you want to view?\n"))
         if page < 1:
             page = "1"
-    print(page)
 
     per_page = None
     if args["pp"] == 0:
         per_page = int(input("\nHow many per page?\n"))
         if per_page < 1:
             per_page = "30"
-    print(per_page)
 
     file_format = None
     if not args["json"] and not args["txt"]:
         file_format = input("\nSelect a file format (json/txt):\n")
     if args["json"]: file_format = "json"
     if args["txt"]: file_format = "txt"
-    print(file_format)
 
     print("\nFetching...\n")
 
