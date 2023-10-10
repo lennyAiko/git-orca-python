@@ -19,7 +19,7 @@ def get_args(
         pp: int = 0,
         p: int = 0,
         owner: str = "",
-        name: str = "",
+        repo: str = "",
         issues: bool = False,
         pr: bool = False,
         opened: bool = False,
@@ -37,7 +37,7 @@ def get_args(
     txt or json => The format of the output (--txt --json)
     """
     args_store["owner"] = owner
-    args_store["name"] = name
+    args_store["repo"] = repo
     args_store["issues"] = issues
     args_store["pr"] = pr
     args_store["opened"] = opened

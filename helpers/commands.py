@@ -14,12 +14,16 @@ def CLI(token, args):
         owner = input("\nWho is the owner of the repo?\n")
         if not owner:
             owner = "lennyaiko"
+    else:
+        owner = args["owner"]
 
     repo = None
-    if not args["name"]:
+    if not args["repo"]:
         repo = input("\nWhat is the name of the repo?\n")
         if not repo:
             repo = "git-orca"
+    else:
+        repo = args["repo"]
 
     selection = None
     if not args["issues"] and not args["pr"]:
@@ -71,22 +75,29 @@ def CLI(token, args):
 
     if len(r) < 1:
         print(f"Found no {selection}'s here")
+    elif len(r) < 3:
+        try:
+            if r["message"] == 'Not Found':
+                print(f"{repo} not found under {owner}")
+        except:
+            pass
     else:
+        source = owner + '/' + repo
         match(selection):
             case "issues":
                 print("\nGenerating file...\n")
                 match(file_format):
                     case "json":
-                        write_json_issues(r)                
+                        write_json_issues(r, source)                
                     case "txt":
-                        write_txt_issues(r)
+                        write_txt_issues(r, source)
             case "pr":
                 print("\nGenerating file...\n")
                 match (file_format):
                     case "json":
-                        write_json_pr(r)
+                        write_json_pr(r, source)
                     case "pr":
-                        write_txt_pr(r)
+                        write_txt_pr(r, source)
             case _:
                 print(f"Found no {selection}'s here")
 
