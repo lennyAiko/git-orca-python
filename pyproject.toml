@@ -3,12 +3,18 @@ name = "git-orca-python"
 version = "0.1.0"
 description = "This a CLI tool to fetch issues and PRs from any repo"
 authors = ["lennox charles <lennyaiko17@gmail.com>"]
+maintainers = ["lennox charles <lennyaiko17@gmail.com>"]
 license = "MIT"
 readme = "README.md"
+homepage = "https://github.com/lennyAiko/git-orca-python"
+repository = "https://github.com/lennyAiko/git-orca-python"
+keywords = ["github", "issues", "git", "tool", "pr", "CLI"]
 
 [tool.poetry.dependencies]
 python = "^3.11"
 
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/lennyAiko/git-orca-python/issues"
 
 [build-system]
 requires = ["poetry-core"]
