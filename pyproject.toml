@@ -9,7 +9,7 @@ readme = "README.md"
 homepage = "https://github.com/lennyAiko/git-orca-python"
 repository = "https://github.com/lennyAiko/git-orca-python"
 keywords = ["github", "issues", "git", "tool", "pr", "CLI"]
-packages = [{include: "git-orca"}]
+packages = [{include = "git-orca"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"

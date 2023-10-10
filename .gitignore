@@ -4,3 +4,4 @@ git-orca/git-orca.json
 git-orca/git-orca.txt
 git-orca/helpers/__pycache__
 test.py
+dist/
