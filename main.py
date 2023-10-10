@@ -16,16 +16,16 @@ def main(token, args):
         sys.exit()
     
 def get_args(
-        owner: str = "lennyaiko",
-        name: str = "git-orca",
+        pp: int = 0,
+        p: int = 0,
+        owner: str = "",
+        name: str = "",
         issues: bool = False,
         pr: bool = False,
         opened: bool = False,
-        closed: bool = True,
-        p: int = 1,
-        pp: int = 30,
+        closed: bool = False,
         txt: bool = False,
-        json: bool = True,
+        json: bool = False,
     ):
     """
     Glad you made it here! The available commands are: \n

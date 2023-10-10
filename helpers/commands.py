@@ -3,50 +3,75 @@
 import requests, os, json
 from .creator import write_json_issues, write_txt_issues, write_json_pr, write_txt_pr
 
-def default_value(var, value):
-    if not var:
-        var = value
-        print(var)
-    return var
+def ask_question(question, type):
+    pass
 
 def CLI(token, args):
-    print(args)
     print("\n<==> git-orca <==>\n")
 
-    owner = input("\nWho is the owner of the repo?\n")
-    owner = default_value(var=owner, value="lennyaiko")
+    owner = None
+    if not args["owner"]:
+        owner = input("\nWho is the owner of the repo?\n")
+        if not owner:
+            owner = "lennyaiko"
+            print(owner)
 
-    repo = input("\nWhat is the name of the repo?\n")
-    repo = default_value(var=repo, value="mantasails")
+    repo = None
+    if not args["name"]:
+        repo = input("\nWhat is the name of the repo?\n")
+        if not repo:
+            repo = "git-orca"
+            print(repo)
 
-    selection = input("\nDo you want to view issues or PR?\n")
-    selection = default_value(var=selection, value="issues")
+    selection = None
+    if not args["issues"] and not args["pr"]:
+        selection = input("\nDo you want to view issues or PR?\n")
+    if args["issues"]: selection = "issues"
+    if args["pr"]: selection = "pr"
+    print(selection)
 
-    state = input("\nDo you want open or closed?\n")
-    state = default_value(var=state, value="closed")
+    state = None
+    if not args["opened"] and not args["closed"]:
+        state = input("\nDo you want open or closed?\n")
+    if args["opened"]: state = "open"
+    if args["closed"]: state = "closed"
+    print(state)
 
-    page = input("\nWhat page do you want to view?\n")
-    page = default_value(var=page, value="1")
+    page = None
+    if args["p"] == 0:
+        page = int(input("\nWhat page do you want to view?\n"))
+        if page < 1:
+            page = "1"
+    print(page)
 
-    per_page = input("\nHow many per page?\n")
-    per_page = default_value(var=per_page, value="30")
+    per_page = None
+    if args["pp"] == 0:
+        per_page = int(input("\nHow many per page?\n"))
+        if per_page < 1:
+            per_page = "30"
+    print(per_page)
 
-    file_format = input("\nSelect a file format:\n" )
-    file_format = default_value(var=file_format, value="txt")
+    file_format = None
+    if not args["json"] and not args["txt"]:
+        file_format = input("\nSelect a file format (json/txt):\n")
+    if args["json"]: file_format = "json"
+    if args["txt"]: file_format = "txt"
+    print(file_format)
 
     print("\nFetching...\n")
 
     r = requests.get(f"https://api.github.com/repos/{owner}/{repo}/issues",
-                    headers={
-                        "Accept": "application/vnd.github+json",
-                        "X-GitHub-Api-Version": "2022-11-28",
-                        "Authorization": f"Bearer {token}"
-                    },
-                    params={
-                        "state": f"{state}",
-                        "per_page": f"{per_page}",
-                        "page": f"{page}"
-                    })
+            headers={
+                "Accept": "application/vnd.github+json",
+                "X-GitHub-Api-Version": "2022-11-28",
+                "Authorization": f"Bearer {token}"
+            },
+            params={
+                "state": f"{state}",
+                "per_page": f"{per_page}",
+                "page": f"{page}"
+            }
+        )
     r = r.json()
 
     print("\nDone fetching")
